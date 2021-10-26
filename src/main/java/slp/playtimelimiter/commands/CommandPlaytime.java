@@ -1,7 +1,6 @@
 package slp.playtimelimiter.commands;
 
 import com.mojang.authlib.GameProfile;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -9,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import slp.playtimelimiter.PlaytimeLimiter;
@@ -41,7 +41,6 @@ public class CommandPlaytime extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        EntityPlayerMP player = null;
         switch (args.length) {
             case 0:
                 if (!(sender instanceof EntityPlayerMP)) {
@@ -51,9 +50,9 @@ public class CommandPlaytime extends CommandBase {
 
                 sender.sendMessage(
                         new TextComponentString(
-                                ChatFormatting.GREEN + "You have "
-                                        + ChatFormatting.AQUA + ChatFormatting.BOLD + PlaytimeDataManager.getRemainingTimeInMintues((EntityPlayerMP) sender)
-                                        + ChatFormatting.GREEN + " Minutes remaining!"
+                                TextFormatting.GREEN + "You have "
+                                        + TextFormatting.AQUA + TextFormatting.BOLD + PlaytimeDataManager.getRemainingTimeInMintues((EntityPlayerMP) sender)
+                                        + TextFormatting.GREEN + " Minutes remaining!"
                         )
                 );
                 break;
@@ -65,7 +64,7 @@ public class CommandPlaytime extends CommandBase {
                     PlaytimeLimiter.getInstance().getConfigManager().init();
                     sender.sendMessage(
                             new TextComponentString(
-                                    ChatFormatting.GREEN + "Reloading Config ..."
+                                    TextFormatting.GREEN + "Reloading Config ..."
                             )
                     );
                     break;
@@ -86,10 +85,10 @@ public class CommandPlaytime extends CommandBase {
                         if (target == null) {
                             sender.sendMessage(
                                     new TextComponentString(
-                                            ChatFormatting.RED + "No Player by the Name of "
-                                                    + ChatFormatting.YELLOW + "\"" + args[1] + "\""
-                                                    + ChatFormatting.RED + " has joined the Server before!"
-                                                    + ChatFormatting.GRAY + " (Maybe they Namechanged?)"
+                                            TextFormatting.RED + "No Player by the Name of "
+                                                    + TextFormatting.YELLOW + "\"" + args[1] + "\""
+                                                    + TextFormatting.RED + " has joined the Server before!"
+                                                    + TextFormatting.GRAY + " (Maybe they Namechanged?)"
                                     )
                             );
                             return;
@@ -104,10 +103,11 @@ public class CommandPlaytime extends CommandBase {
                     PlaytimeDataManager.resetTime(targetPlayer);
                     sender.sendMessage(
                             new TextComponentString(
-                                    ChatFormatting.GREEN + "You have successfully reset the Playtime and Timeout for "
-                                            + ChatFormatting.AQUA + "\"" + targetPlayer.getName() + "\""
+                                    TextFormatting.GREEN + "You have successfully reset the Playtime and Timeout for "
+                                            + TextFormatting.AQUA + "\"" + targetPlayer.getName() + "\""
                             )
                     );
+                    break;
                 }
 
                 getUsage(sender);
@@ -115,10 +115,15 @@ public class CommandPlaytime extends CommandBase {
         }
     }
 
+    @Override
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
+        return true;
+    }
+
     private boolean checkPermission(ICommandSender sender) {
         if (!sender.canUseCommand(2, "")) {
             sender.sendMessage(new TextComponentString(
-                            ChatFormatting.RED + "I'm sorry, but you cannot use this Command!"
+                    TextFormatting.RED + "I'm sorry, but you do not have Permissions to use this Command!"
                     )
             );
             return false;

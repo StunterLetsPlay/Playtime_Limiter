@@ -1,9 +1,9 @@
 package slp.playtimelimiter.playtime;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import slp.playtimelimiter.PlaytimeLimiter;
 
 import java.text.DecimalFormat;
@@ -63,9 +63,9 @@ public class PlaytimeDataManager {
             case 60*30:
                 player.sendMessage(
                         new TextComponentString(
-                                ChatFormatting.YELLOW + "You have "
-                                + ChatFormatting.GOLD + ChatFormatting.BOLD + (timeLeft / 60) +
-                                        ChatFormatting.YELLOW + " Minutes of Playtime left!"
+                                TextFormatting.YELLOW + "You have "
+                                + TextFormatting.GOLD + TextFormatting.BOLD + (timeLeft / 60) +
+                                        TextFormatting.YELLOW + " Minutes of Playtime left!"
                         )
                 );
                 break;

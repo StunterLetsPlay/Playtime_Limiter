@@ -1,9 +1,9 @@
 package slp.playtimelimiter.server;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -67,7 +67,7 @@ public class PlayerJoinListener {
                 if (!compound.hasKey("timeout")) {
                     if (newTime <= 0) {
                         int timeout = PlaytimeLimiter.getInstance().getConfigManager().playtimeTimeout;
-                        kickPlayer(playerMP, Integer.toString(timeout));
+                        kickPlayer(playerMP, new DecimalFormat("0.00").format(timeout / 60.0));
 
                         if (!compound.hasKey("timeout"))
                             compound.setLong("timeout", System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(timeout));
@@ -104,16 +104,16 @@ public class PlayerJoinListener {
             return;
 
         playerMP.connection.disconnect(new TextComponentString(
-                ChatFormatting.RED + "Your Playtime is over!"
+                TextFormatting.RED + "Your Playtime is over!"
                         + "\n\n"
-                        + ChatFormatting.YELLOW + "Sadly you have used up all of your Playtime" +
+                        + TextFormatting.YELLOW + "Sadly you have used up all of your Playtime" +
                         "\n" +
-                        ChatFormatting.YELLOW + "and thus have been kicked!"
+                        TextFormatting.YELLOW + "and thus have been kicked!"
                         + "\n\n"
-                        + ChatFormatting.WHITE + "You will be able to join again in:"
+                        + TextFormatting.WHITE + "You will be able to join again in:"
                         + "\n"
-                        + ChatFormatting.AQUA + ChatFormatting.BOLD
-                        + duration + ChatFormatting.RESET + " Minute(s)!")
+                        + TextFormatting.AQUA + TextFormatting.BOLD
+                        + duration + TextFormatting.RESET + " Minute(s)!")
         );
     }
 
