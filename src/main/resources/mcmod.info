@@ -1,0 +1,16 @@
+[
+{
+  "modid": "playtimelimiter",
+  "name": "§c§lPlaytime Limiter",
+  "description": "Limits the Amount of Time a Player can play on your Server",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://twitter.com/StunterLetsPlay",
+  "updateUrl": "",
+  "authorList": ["StunterLetsPlay"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
