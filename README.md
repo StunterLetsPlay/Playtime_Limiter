@@ -1,3 +1,7 @@
+## THIS PROJECT IS NO LONGER UPDATED
+Searching for a Updated Version ?
+Head over to SkinnyDevi's Port: https://github.com/SkinnyDevi/playtimelimiter
+
 # Playtime Limiter
 You hate having Players Speedrun the Game in 6.12 Seconds whilst all other 99 Players are still farming Wood?
 Do you want to set a limit to how long Players can play on your Server?
